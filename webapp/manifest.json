@@ -26,7 +26,7 @@
                 }
             },
             "ZVB_3DERP_PORELFILTER_CDS_Annotation": {
-                "uri": "/destinations/LTD888/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZVB_3DERP_PORELFILTER_CDS_VAN',Version='0001')/$value/",
+                "uri": "/destinations/LTD888_S4HANA2022/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZVB_3DERP_PORELFILTER_CDS_VAN',Version='0001')/$value/",
                 "type": "ODataAnnotation",
                 "settings": {
                     "localUri": "localService/ZVB_3DERP_PORELFILTER_CDS/ZVB_3DERP_PORELFILTER_CDS_Annotation.xml"

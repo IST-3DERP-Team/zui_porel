@@ -7,7 +7,7 @@
 |**Generation Platform**<br>SAP Business Application Studio|
 |**Template Used**<br>simple|
 |**Service Type**<br>SAP System (ABAP On Premise)|
-|**Service URL**<br>http://159.138.39.203:8000/sap/opu/odata/sap/ZGW_3DERP_POREL_SRV
+|**Service URL**<br>http://190.92.230.65:8000/sap/opu/odata/sap/ZGW_3DERP_POREL_SRV
 |**Module Name**<br>zui_porel|
 |**Application Title**<br>PO Release|
 |**Namespace**<br>|

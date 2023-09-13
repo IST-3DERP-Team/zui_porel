@@ -20,7 +20,7 @@ sap.ui.define([
         "use strict";
 
         var _this;
-        var _startUpInfo;
+        var _startUpInfo = {};
         var _oCaption = {};
         var _aRelCd = [];
 
@@ -33,10 +33,15 @@ sap.ui.define([
             onInit: function () {
                 _this = this;
 
-                var oModelStartUp= new sap.ui.model.json.JSONModel();
-                oModelStartUp.loadData("/sap/bc/ui2/start_up").then(() => {
-                    _startUpInfo = oModelStartUp.oData
-                });
+                if (sap.ushell.Container) {
+                    var oModelStartUp= new sap.ui.model.json.JSONModel();
+                    oModelStartUp.loadData("/sap/bc/ui2/start_up").then(() => {
+                        _startUpInfo = oModelStartUp.oData;
+                    });
+                }
+                else {
+                    _startUpInfo.id = "BAS_CONN";
+                }
 
                 this.initializeComponent();
 
