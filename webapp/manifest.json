@@ -20,9 +20,9 @@
                 "uri": "/sap/opu/odata/sap/ZGW_3DERP_POREL_SRV/",
                 "type": "OData",
                 "settings": {
-                    "odataVersion": "2.0",
                     "annotations": [],
-                    "localUri": "localService/mainService/metadata.xml"
+                    "localUri": "localService/mainService/metadata.xml",
+                    "odataVersion": "2.0"
                 }
             },
             "ZVB_3DERP_PORELFILTER_CDS_Annotation": {

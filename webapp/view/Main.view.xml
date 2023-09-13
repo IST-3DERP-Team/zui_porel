@@ -21,15 +21,20 @@
         <content>
 
             <VBox id="vbPORel" fitContainer="true">
-                <sfb:SmartFilterBar id="sfbPORel" entitySet="ZVB_3DERP_PORELFILTER" enableBasicSearch="true" search="onSearch" 
+                <sfb:SmartFilterBar id="sfbPORel" entitySet="ZVB_3DERP_PORELFILTER" enableBasicSearch="true" search="onSearch"
                     persistencyKey="3DERP_PORelKey" filterContainerWidth="14rem" useToolbar="true" showClearOnFB="true" initialise="onSFBInitialise">
+                    <sfb:controlConfiguration>
+                        <sfb:ControlConfiguration id="filterSbu" key="SBU" groupId="_BASIC" label="{ddtext>/SBU}" controlType="dropDownList" filterType="single"
+                            displayBehaviour="idOnly" mandatory="mandatory" index="0">
+                        </sfb:ControlConfiguration>
+                    </sfb:controlConfiguration>
                     <!-- <sfb:controlConfiguration>
                         <sfb:ControlConfiguration id="filterRelGrp" key="RELGRP" groupId="_BASIC" label="{ddtext>/RELGRP}" controlType="dropDownList" filterType="single"
                             displayBehaviour="idAndDescription" mandatory="notMandatory" index="0">
                         </sfb:ControlConfiguration>
                     </sfb:controlConfiguration> -->
                     <sfb:controlConfiguration>
-                        <sfb:ControlConfiguration id="filterRelGrp" key="RELGRP" groupId="_BASIC" label="{ddtext>/RELGRP}" index="0">
+                        <sfb:ControlConfiguration id="filterRelGrp" key="RELGRP" groupId="_BASIC" label="{ddtext>/RELGRP}" index="1">
                             <sfb:customControl>
                                 <ComboBox
                                     id="cmbRelGrp"
@@ -47,12 +52,12 @@
                         </sfb:ControlConfiguration>
                     </sfb:controlConfiguration>
                     <!-- <sfb:controlConfiguration>
-                        <sfb:ControlConfiguration id="filterRelCd" key="RELCD" groupId="_BASIC" label="{ddtext>/RELCD}" preventInitialDataFetchInValueHelpDialog="false" 
+                        <sfb:ControlConfiguration id="filterRelCd" key="RELCD" groupId="_BASIC" label="{ddtext>/RELCD}" preventInitialDataFetchInValueHelpDialog="false"
                             displayBehaviour="idAndDescription" mandatory="notMandatory" index="1">
                         </sfb:ControlConfiguration>
                     </sfb:controlConfiguration> -->
                     <sfb:controlConfiguration>
-                        <sfb:ControlConfiguration id="filterRelCd" key="RELCD" groupId="_BASIC" label="{ddtext>/RELCD}" index="1">
+                        <sfb:ControlConfiguration id="filterRelCd" key="RELCD" groupId="_BASIC" label="{ddtext>/RELCD}" index="2">
                             <sfb:customControl>
                                 <ComboBox
                                     id="cmbRelCd"
@@ -71,33 +76,33 @@
                         </sfb:ControlConfiguration>
                     </sfb:controlConfiguration>
                     <sfb:controlConfiguration>
-                        <sfb:ControlConfiguration id="filterDocType" key="DOCTYPE" groupId="_BASIC" label="{ddtext>/DOCTYPE}" controlType="dropDownList" 
-                            displayBehaviour="idOnly" mandatory="notMandatory" index="2">
+                        <sfb:ControlConfiguration id="filterDocType" key="DOCTYPE" groupId="_BASIC" label="{ddtext>/DOCTYPE}"
+                            preventInitialDataFetchInValueHelpDialog="false" displayBehaviour="idOnly" mandatory="notMandatory" index="3">
                         </sfb:ControlConfiguration>
                     </sfb:controlConfiguration>
                     <sfb:controlConfiguration>
-                        <sfb:ControlConfiguration id="filterPurchOrg" key="PURCHORG" groupId="_BASIC" label="{ddtext>/PURCHORG}" controlType="dropDownList" 
-                            displayBehaviour="idAndDescription" mandatory="notMandatory" index="3">
+                        <sfb:ControlConfiguration id="filterPurchOrg" key="PURCHORG" groupId="_BASIC" label="{ddtext>/PURCHORG}"
+                            preventInitialDataFetchInValueHelpDialog="false" displayBehaviour="idAndDescription" mandatory="notMandatory" index="4">
                         </sfb:ControlConfiguration>
                     </sfb:controlConfiguration>
                     <sfb:controlConfiguration>
-                        <sfb:ControlConfiguration id="filterPurchGrp" key="PURCHGRP" groupId="_BASIC" label="{ddtext>/PURCHGRP}" controlType="dropDownList" 
-                            displayBehaviour="idAndDescription" mandatory="notMandatory" index="4">
+                        <sfb:ControlConfiguration id="filterPurchGrp" key="PURCHGRP" groupId="_BASIC" label="{ddtext>/PURCHGRP}"
+                            preventInitialDataFetchInValueHelpDialog="false" displayBehaviour="idAndDescription" mandatory="notMandatory" index="5">
                         </sfb:ControlConfiguration>
                     </sfb:controlConfiguration>
                     <sfb:controlConfiguration>
-                        <sfb:ControlConfiguration id="filterVendor" key="VENDOR" groupId="_BASIC" label="{ddtext>/VENDOR}" controlType="dropDownList" 
-                            displayBehaviour="idAndDescription" mandatory="notMandatory" index="5">
+                        <sfb:ControlConfiguration id="filterVendor" key="VENDOR" groupId="_BASIC" label="{ddtext>/VENDOR}"
+                            preventInitialDataFetchInValueHelpDialog="false" displayBehaviour="idAndDescription" mandatory="notMandatory" index="6">
                         </sfb:ControlConfiguration>
                     </sfb:controlConfiguration>
                     <sfb:controlConfiguration>
-                        <sfb:ControlConfiguration id="filterRelInd" key="RELIND" groupId="_BASIC" label="{ddtext>/RELIND}" controlType="dropDownList" 
-                            displayBehaviour="idAndDescription" mandatory="notMandatory" index="6">
+                        <sfb:ControlConfiguration id="filterRelInd" key="RELIND" groupId="_BASIC" label="{ddtext>/RELIND}" controlType="dropDownList"
+                            displayBehaviour="idAndDescription" mandatory="notMandatory" index="7">
                         </sfb:ControlConfiguration>
                     </sfb:controlConfiguration>
                     <sfb:controlConfiguration>
-                        <sfb:ControlConfiguration id="filterPONo" key="PONO" groupId="_BASIC" label="{ddtext>/PONO}" controlType="dropDownList" 
-                            displayBehaviour="idOnly" mandatory="notMandatory" index="7">
+                        <sfb:ControlConfiguration id="filterPONo" key="PONO" groupId="_BASIC" label="{ddtext>/PONO}"
+                            preventInitialDataFetchInValueHelpDialog="false" displayBehaviour="idOnly" mandatory="notMandatory" index="8">
                         </sfb:ControlConfiguration>
                     </sfb:controlConfiguration>
                     <sfb:layoutData>

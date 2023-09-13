@@ -2,19 +2,21 @@
 <edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
     <edmx:DataServices m:DataServiceVersion="2.0">
         <Schema Namespace="ZGW_3DERP_POREL_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
             <EntityType Name="PORelease" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="PONO"/>
                 </Key>
+                <Property Name="SBU" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="SBU" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="PONO" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Purchasing Doc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="RELCDNAME" Type="Edm.String" Nullable="false" MaxLength="23" sap:unicode="false" sap:label="RELCDNAME" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="PODATE" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Created on" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PODATE" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Created On" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="RELINDNAME" Type="Edm.String" Nullable="false" MaxLength="32" sap:unicode="false" sap:label="RELINDNAME" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="DOCTYPE" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Document Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="RELGRPNAME" Type="Edm.String" Nullable="false" MaxLength="23" sap:unicode="false" sap:label="RELGRPNAME" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="PURCHORG" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Purchasing Org." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="RELSTRATNAME" Type="Edm.String" Nullable="false" MaxLength="23" sap:unicode="false" sap:label="RELSTRATNAME" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="VENDOR" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Vendor" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VENDOR" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Supplier" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="VENDORNAME" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="RELCD" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="RELCD" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="RELIND" Type="Edm.String" Nullable="false" MaxLength="32" sap:unicode="false" sap:label="RELIND" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
@@ -48,18 +50,31 @@
                 <Property Name="NETPRICE" Type="Edm.Decimal" Nullable="false" Precision="12" Scale="3" sap:unicode="false" sap:label="Net Price" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="PER" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="0" sap:unicode="false" sap:label="Price unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ORDERPRICEUNIT" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Order Price Un." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
-                <Property Name="IRIND" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Invoice receipt" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IRIND" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Invoice Receipt" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="GRBASEDIV" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="GR-Based IV" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="OVERDELTOL" Type="Edm.Decimal" Nullable="false" Precision="3" Scale="1" sap:unicode="false" sap:label="Overdeliv. Tol." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="UNDERDELTOL" Type="Edm.Decimal" Nullable="false" Precision="3" Scale="1" sap:unicode="false" sap:label="Underdel. Tol." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="UNLIMITED" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Unlimited" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
+            <EntityType Name="POReleaseTbl" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EBELN"/>
+                </Key>
+                <Property Name="EBELN" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Purchasing Doc." sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="REVNO" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Rev Number" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RELDT" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Release Date" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VERNO" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="Version" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RELCNT" Type="Edm.Int16" sap:unicode="false" sap:label="Rel Count" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CREATEDBY" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="Created By" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CREATEDDT" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Created Date" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
             <EntityContainer Name="ZGW_3DERP_POREL_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
                 <EntitySet Name="POReleaseSet" EntityType="ZGW_3DERP_POREL_SRV.PORelease" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
                 <EntitySet Name="POItemSet" EntityType="ZGW_3DERP_POREL_SRV.POItem" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="POReleaseTblSet" EntityType="ZGW_3DERP_POREL_SRV.POReleaseTbl" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
             </EntityContainer>
-            <atom:link rel="self" href="http://159.138.39.203:8000/sap/opu/odata/sap/ZGW_3DERP_POREL_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
-            <atom:link rel="latest-version" href="http://159.138.39.203:8000/sap/opu/odata/sap/ZGW_3DERP_POREL_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="self" href="http://190.92.230.65:8000/sap/opu/odata/sap/ZGW_3DERP_POREL_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://190.92.230.65:8000/sap/opu/odata/sap/ZGW_3DERP_POREL_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
         </Schema>
     </edmx:DataServices>
 </edmx:Edmx>
