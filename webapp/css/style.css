@@ -3,3 +3,15 @@
 .activeRow {
     background-color: #e1ebf3 !important;
 }
+
+.requiredField {
+    color: red !important;
+}
+
+.sapMLabelRequired, .sapMLabelRequired::before {
+    color: #c75858 !important;
+}
+
+.sapMDialogScroll {
+    height: 98%;
+}

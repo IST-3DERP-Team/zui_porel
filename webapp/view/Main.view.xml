@@ -130,7 +130,7 @@
                     rowSelectionChange="onRowSelectionChange">
                     <uiT:extension>
                         <Toolbar>
-                            <Text text="{ui>/rowCount} {ddtext>/ROWS}" />
+                            <Text text="{ui>/rowCount} {ddtext>/ITEM(S)}" />
                             <ToolbarSpacer/>
                             <Button id="btnReleaseSave" 
                                 text="{ddtext>/RELSAVE}"
