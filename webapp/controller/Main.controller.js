@@ -96,9 +96,10 @@ sap.ui.define([
                     this.byId("btnReleaseSave").setEnabled(false);
                     this.byId("btnCancelReleaseSave").setEnabled(false);
                     this.byId("btnRejectSave").setEnabled(false);
+                    this.byId("btnRefresh").setEnabled(false);
                     this.byId("btnPrintPreview").setEnabled(false);
                     this.byId("btnExport").setEnabled(false);
-                    this.byId("btnRefresh").setEnabled(false);
+                    this.byId("btnTabLayout").setEnabled(false);
                 }
                 else {
                     this.onRefresh();
@@ -187,14 +188,54 @@ sap.ui.define([
                 this.byId("btnReleaseSave").setEnabled(true);
                 this.byId("btnCancelReleaseSave").setEnabled(true);
                 this.byId("btnRejectSave").setEnabled(true);
+                this.byId("btnRefresh").setEnabled(true);
                 this.byId("btnPrintPreview").setEnabled(true);
                 this.byId("btnExport").setEnabled(true);
-                this.byId("btnRefresh").setEnabled(true);
+                this.byId("btnTabLayout").setEnabled(true);
             },
 
             getPORel(pFilters, pFilterGlobal) {
+                var oSmartFilter = this.getView().byId("sfbPORel").getFilters();
+                var aFilters = [],
+                    aFilter = [],
+                    aCustomFilter = [],
+                    aSmartFilter = [];
+
+                if (oSmartFilter.length > 0 && oSmartFilter[0].aFilters)  {
+                    oSmartFilter[0].aFilters.forEach(item => {
+                        // console.log(item)
+                        if (item.aFilters === undefined) {
+                            aFilter.push(new Filter(item.sPath, item.sOperator, item.oValue1));
+                        }
+                        else {
+                            aFilters.push(item);
+                        }
+                    })
+
+                    if (aFilter.length > 0) { aFilters.push(new Filter(aFilter, false)); }
+                }
+                else {
+                    var sName = pFilters[0].sPath;
+                    aFilters.push(new Filter(sName, FilterOperator.EQ, pFilters[0].oValue1));
+                }
+
+                // Release Group
+                var sSelectedKeyRelGrp = this.getView().byId("cmbRelGrp").getSelectedKey();
+                if (sSelectedKeyRelGrp) {
+                    aFilters.push(new Filter("RELGRP", FilterOperator.EQ, sSelectedKeyRelGrp));
+                }
+
+                // Release Code
+                var sSelectedKeyRelCd = this.getView().byId("cmbRelCd").getSelectedKey();
+                if (sSelectedKeyRelCd) {
+                    aFilters.push(new Filter("RELCD", FilterOperator.EQ, sSelectedKeyRelCd));
+                }
+                
+                aSmartFilter.push(new Filter(aFilters, true));
+ 
                 var oModel = this.getOwnerComponent().getModel();
                 oModel.read('/POReleaseSet', {
+                    filters: aSmartFilter,
                     success: function (data, response) {
                         console.log("POReleaseSet", data)
                         if (data.results.length > 0) {
@@ -202,25 +243,28 @@ sap.ui.define([
                                 return new Date(b.PODATE) - new Date(a.PODATE);
                             });
 
-                            data.results.forEach(item => {
+                            data.results.forEach((item, idx) => {
                                 if (item.PODATE !== null)
                                     item.PODATE = _this.formatDate(item.PODATE);
+
+                                if (idx == 0) item.ACTIVE = "X";
+                                else item.ACTIVE = "";
                             })
-
-                            var aFilterTab = [];
-                            if (_this.getView().byId("poRelTab").getBinding("rows")) {
-                                aFilterTab = _this.getView().byId("poRelTab").getBinding("rows").aFilters;
-                            }
-
-                            var oJSONModel = new sap.ui.model.json.JSONModel();
-                            oJSONModel.setData(data);
-                            _this.getView().setModel(oJSONModel, "poRel");
-                            _this._tableRendered = "poRelTab";
-
-                            _this.onFilterBySmart(pFilters, pFilterGlobal, aFilterTab);
-
-                            _this.setRowReadMode("poRel");
                         }
+
+                        // var aFilterTab = [];
+                        // if (_this.getView().byId("poRelTab").getBinding("rows")) {
+                        //     aFilterTab = _this.getView().byId("poRelTab").getBinding("rows").aFilters;
+                        // }
+
+                        var oJSONModel = new sap.ui.model.json.JSONModel();
+                        oJSONModel.setData(data);
+                        _this.getView().setModel(oJSONModel, "poRel");
+                        _this._tableRendered = "poRelTab";
+
+                        //_this.onFilterBySmart(pFilters, pFilterGlobal, aFilterTab);
+
+                        _this.setRowReadMode("poRel");
 
                         // Set row count
                         _this.getView().getModel("ui").setProperty("/rowCount", data.results.length);
@@ -321,7 +365,7 @@ sap.ui.define([
                 // else oFilter = new Filter(aFilterGrp, true);
 
                 oFilter = new Filter(aFilterGrp, true);
-
+console.log(oFilter)
                 this.byId("poRelTab").getBinding("rows").filter(oFilter, "Application");
 
                 
@@ -435,7 +479,7 @@ sap.ui.define([
 
                 var oModel = _this.getOwnerComponent().getModel();
                 var oModelRFC = _this.getOwnerComponent().getModel("ZGW_3DERP_RFC_SRV");
-                oModel.create("/PO_ReleaseSet", oParam, {
+                oModelRFC.create("/PO_ReleaseSet", oParam, {
                     method: "POST",
                     success: function(data, oResponse) {
                         console.log("PO_ReleaseSet", data);
@@ -727,16 +771,20 @@ sap.ui.define([
                         "PONo": oData.PONO
                     });
 
-                    var oCrossAppNavigator = sap.ushell.Container.getService("CrossApplicationNavigation");
-                    var hashUrl = (oCrossAppNavigator && oCrossAppNavigator.hrefForExternal({
-                            target: {
-                                semanticObject: "ZSO_POPRINT_PRVW",
-                                action: "display"
-                                    },
-                                params : aPOItem[0]
-                            }));
-                    oCrossAppNavigator.toExternal({target: {shellHash: hashUrl}});
+                    if (sap.ushell.Container) {
+                        var oCrossAppNavigator = sap.ushell.Container.getService("CrossApplicationNavigation");
+                        var hashUrl = (oCrossAppNavigator && oCrossAppNavigator.hrefForExternal({
+                                target: {
+                                    semanticObject: "ZSO_POPRINT_PRVW",
+                                    action: "display"
+                                        },
+                                    params : aPOItem[0]
+                                }));
+                        oCrossAppNavigator.toExternal({target: {shellHash: hashUrl}});
+                    }
                 });
+
+                _this.closeLoadingDialog();
             },
 
             onExport(pModel) {
@@ -811,6 +859,53 @@ sap.ui.define([
                     });
             },
 
+            onSaveTableLayout: function (oEvent) {
+                var ctr = 1;
+                var oTable = oEvent.getSource().oParent.oParent;
+                var oColumns = oTable.getColumns();
+                var sSBU = _this.getView().getModel("ui").getData().sbu;
+
+                var oParam = {
+                    "SBU": sSBU,
+                    "TYPE": "",
+                    "TABNAME": "",
+                    "TableLayoutToItems": []
+                };
+
+                _aTableProp.forEach(item => {
+                    if (item.tblModel == oTable.getBindingInfo("rows").model) {
+                        oParam['TYPE'] = item.modCode;
+                        oParam['TABNAME'] = item.tblSrc;
+                    }
+                });
+
+                oColumns.forEach((column) => {
+                    oParam.TableLayoutToItems.push({
+                        COLUMNNAME: column.mProperties.sortProperty,
+                        ORDER: ctr.toString(),
+                        SORTED: column.mProperties.sorted,
+                        SORTORDER: column.mProperties.sortOrder,
+                        SORTSEQ: "1",
+                        VISIBLE: column.mProperties.visible,
+                        WIDTH: column.mProperties.width.replace('px','')
+                    });
+
+                    ctr++;
+                });
+
+                var oModel = _this.getOwnerComponent().getModel("ZGW_3DERP_COMMON_SRV");
+                oModel.create("/TableLayoutSet", oParam, {
+                    method: "POST",
+                    success: function(data, oResponse) {
+                        MessageBox.information(_oCaption.INFO_LAYOUT_SAVE);
+                    },
+                    error: function(err) {
+                        MessageBox.error(err);
+                        _this.closeLoadingDialog();
+                    }
+                });                
+            },
+
             getCaption() {
                 var oJSONModel = new JSONModel();
                 var oDDTextParam = [];
@@ -839,10 +934,13 @@ sap.ui.define([
                 oDDTextParam.push({CODE: "PRTPREV"});
                 oDDTextParam.push({CODE: "EXPORTTOEXCEL"});
                 oDDTextParam.push({CODE: "REFRESH"});
+                oDDTextParam.push({CODE: "SAVELAYOUT"});
 
                 // MessageBox
                 oDDTextParam.push({CODE: "INFO_NO_SELECTED"});
                 oDDTextParam.push({CODE: "INFO_SEL_PO_WITHGR"});
+                oDDTextParam.push({CODE: "INFO_LAYOUT_SAVE"});
+                oDDTextParam.push({CODE: "INFO_NO_RECORD_SELECT"});
                 
                 oModel.create("/CaptionMsgSet", { CaptionMsgItems: oDDTextParam  }, {
                     method: "POST",

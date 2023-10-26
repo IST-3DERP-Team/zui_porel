@@ -133,31 +133,46 @@
                             <Text text="{ui>/rowCount} {ddtext>/ITEM(S)}" />
                             <ToolbarSpacer/>
                             <Button id="btnReleaseSave" 
+                                icon="sap-icon://accept"
                                 text="{ddtext>/RELSAVE}"
+                                tooltip="{ddtext>/RELSAVE}"
                                 press="onRelease('RELEASE')"
                                 visible="true"/>
                             <Button id="btnCancelReleaseSave"
+                                icon="sap-icon://decline"
                                 text="{ddtext>/CRELSAVE}"
+                                tooltip="{ddtext>/CRELSAVE}"
                                 press="onRelease('CANCEL')"
                                 visible="true"/>
                             <Button id="btnRejectSave"
+                                icon="sap-icon://inspect-down"
                                 text="{ddtext>/REJSAVE}"
+                                tooltip="{ddtext>/REJSAVE}"
                                 press="onRelease('REJECT')"
-                                visible="true" />
-                            <Button id="btnPrintPreview"
-                                text="{ddtext>/PRTPREV}"
-                                press="onPrintPreview"
-                                tooltip="{ddtext>/PRTPREV}"
-                                visible="true" />
-                            <Button id="btnExport"
-                                text="{ddtext>/EXPORTTOEXCEL}"
-                                tooltip="{ddtext>/EXPORTTOEXCEL}" 
-                                press="onExport('poRel')"
                                 visible="true" />
                             <Button id="btnRefresh" 
                                 icon="sap-icon://refresh"
+                                text=""
+                                tooltip="{ddtext>/REFRESH}" 
                                 press="onRefresh"
                                 visible="true"/> 
+                            <Button id="btnPrintPreview"
+                                icon="sap-icon://print"
+                                press="onPrintPreview"
+                                text=""
+                                tooltip="{ddtext>/PRTPREV}"
+                                visible="true" />
+                            <Button id="btnExport"
+                                icon="sap-icon://excel-attachment"
+                                text=""
+                                tooltip="{ddtext>/EXPORTTOEXCEL}" 
+                                press="onExport('poRel')"
+                                visible="true" />
+                            <Button id="btnTabLayout"
+                                icon="sap-icon://grid" 
+                                press="onSaveTableLayout"
+                                tooltip="{ddtext>/SAVELAYOUT}" 
+                                visible="true" />
                         </Toolbar>
                     </uiT:extension>
                     <uiT:layoutData>
